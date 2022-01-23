@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}Expenses{% endblock %}
+
+{% block body %}
+
+    	<div class="login-box">
+  <h2>Add expense</h2>
+  <form method="post" action="/expenses/create">
+    <div class="user-box">
+	  <input type="number" id="inputAmount" name="amount" required="" step="0.01"/>
+    <label for="inputAmount">Amount</label>
+    </div>
+	<div class="user-box">
+	  <input type="date" id="inputDate" name="date_of_expense" required="" value="{{today}}"/>
+    <label for="inputDate">Date</label>
+    </div>
+    
+	<label for="inputCategory"></label><br /> 
+	<div class="form-group">
+	<label for="inputWayToPay">Forms Pay</label><br />
+			<input type='radio' id="inputWayToPay" name='payment_method_assigned_to_user_id'  value='1' checked> Cash<br />
+			<input type='radio' id="inputWayToPay" name='payment_method_assigned_to_user_id'  value='2' > Debet card<br />
+			<input type='radio' id="inputWayToPay" name='payment_method_assigned_to_user_id'  value='3' > Credit card<br />
+   </div>
+  <div class="user-box">
+		<label for="Category"> Category: </label><br/><br/>
+					<select name='expense_category_assigned_to_user_id' id='Category' class="form-control">
+						<option  value='1'>Food</option>
+						<option value='2'  >Apartments</option>
+						<option value='3'  >Transport</option>
+						<option value='4'  >Telecommunication</option>
+						<option value='5'  >Healt</option>
+						<option value='6'  >Clothes</option>
+						<option value='7'  >Higiene</option>
+						<option value='8'  >Kids</option>
+						<option value='9'  >Recreation</option>
+						<option value='10'  >Trip</option>
+						<option value='11'  >Traning</option>
+						<option value='12'  >Book</option>
+						<option value='13'  >Savings</option>
+						<option value='14'  >For retirement</option>
+						<option value='15'  >Debt Repayment</option>
+						<option value='16'  >Figt</option>
+						<option value='17'  >Another</option>
+					</select>
+		</div><br/>
+		
+		<div class="user-box">
+	  <input type="text" id="inputAmount" name="expense_comment" required="" "/>
+    <label for="Comment">Comment</label>
+    </div>
+	
+    <a href="">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      
+	  <button>Add</button>
+    </a>
+	
+	</br><h4>All row must to be filled.</h4>
+  </form>
+</div>
+	
+{% endblock %}
