@@ -19,9 +19,11 @@ class Income extends \Core\Model
 	
 	public function saveIncomes()
     {
-   
+		
 		$user_id=$_SESSION['user_id'];
-			
+		
+		echo $user_id;
+		
 		$this->validateIncomes();
 
         if (empty($this->errors)) {

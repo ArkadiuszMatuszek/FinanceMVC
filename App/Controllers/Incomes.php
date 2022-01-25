@@ -23,9 +23,17 @@ class Incomes extends \Core\Controller
     {	
 		$today = Income::todayDate();
 		
-        View::renderTemplate('/Incomes/new.html', 
+		$user_id=$_SESSION['user_id'];
+		
+		if(!isset($user_id)){
+			View::renderTemplate('/Signup/new.html');
+		}else{
+			 View::renderTemplate('/Incomes/new.html', 
 		['today' => $today]
 		);
+		}
+		
+       
 		
 		
 		

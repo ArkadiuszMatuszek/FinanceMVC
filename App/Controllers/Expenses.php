@@ -26,10 +26,17 @@ class Expenses extends \Core\Controller
 		
 		$today = Income::todayDate();
 		
+		
+		$user_id=$_SESSION['user_id'];
+		if(!isset($user_id)){
+			View::renderTemplate('/Signup/new.html');
+		}else{
         View::renderTemplate('/Expenses/new.html', 
 		['today' => $today]
 		);
+		}
     }
+	
 	
 	public function createAction(){
 		
