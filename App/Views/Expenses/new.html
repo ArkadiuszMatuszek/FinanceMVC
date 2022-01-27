@@ -8,21 +8,27 @@
   <h2>Add expense</h2>
   <form method="post" action="/expenses/create">
     <div class="user-box">
-	  <input type="number" id="inputAmount" name="amount" required="" step="0.01"/>
+	  <input type="number" id="inputAmount" name="amount" required="" step="0.01" autocomplete="off"/>
     <label for="inputAmount">Amount</label>
     </div>
 	<div class="user-box">
-	  <input type="date" id="inputDate" name="date_of_expense" required="" value="{{today}}"/>
+	  <input type="date" id="inputDate" name="date_of_expense" required="" value="{{today}}" style="color-scheme: dark"/>
     <label for="inputDate">Date</label>
     </div>
     
-	<label for="inputCategory"></label><br /> 
-	<div class="form-group">
-	<label for="inputWayToPay">Forms Pay</label><br />
-			<input type='radio' id="inputWayToPay" name='payment_method_assigned_to_user_id'  value='1' checked> Cash<br />
-			<input type='radio' id="inputWayToPay" name='payment_method_assigned_to_user_id'  value='2' > Debet card<br />
-			<input type='radio' id="inputWayToPay" name='payment_method_assigned_to_user_id'  value='3' > Credit card<br />
-   </div>
+	
+
+	<div class="user-box">
+		<label for="inputWayToPay"> Forms Pay </label><br/><br/>
+	<select name='payment_method_assigned_to_user_id' id='inputWayToPay' class="form-control">
+						<option  value='1'>Cash</option>
+						<option value='2'  >Debet card</option>
+						<option value='3'  >Credit card</option>
+					</select>
+	
+	</div>
+			
+   
   <div class="user-box">
 		<label for="Category"> Category: </label><br/><br/>
 					<select name='expense_category_assigned_to_user_id' id='Category' class="form-control">
@@ -47,7 +53,7 @@
 		</div><br/>
 		
 		<div class="user-box">
-	  <input type="text" id="inputAmount" name="expense_comment" "/>
+	  <input type="text" id="inputAmount" name="expense_comment" autocomplete="off"/>
     <label for="Comment">Comment</label>
     </div>
 	

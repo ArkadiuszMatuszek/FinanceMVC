@@ -26,11 +26,11 @@
   <h2>Add income</h2>
   <form method="post" action="/incomes/create" id="formIncomes">
     <div class="user-box">
-	  <input type="number" id="inputAmount" name="amount" required="" step="0.01"/>
+	  <input type="number" id="inputAmount" name="amount" required="" step="0.01" autocomplete="off"/>
     <label for="inputAmount">Amount</label>
     </div>
 	<div class="user-box">
-	  <input type="date" id="inputDate" name="date_of_income" required="" value="{{today}}"/>
+	  <input type="date" id="inputDate" name="date_of_income" required="" value="{{today}}" style="color-scheme: dark"/>
     <label for="inputDate">Date</label>
     </div>
     
@@ -38,10 +38,10 @@
 	<div class="user-box">
 	<label for="inputCategory"> Category: </label><br/><br/>
 					<select name='income_category_assigned_to_user_id' id='inputCategory' class="form-control">
-						<option  value='1' selected>Wynagrodzenie</option>
-						<option value='2'  >Odsetki</option>
-						<option value='3'  >przedaż na allegro</option>
-						<option value='4'  >Inne</option>
+						<option  value='1' selected>Salary</option>
+						<option value='2'  >Interest</option>
+						<option value='3'  >Allegro</option>
+						<option value='4'  >Another</option>
 						
 						
 					</select>
@@ -49,7 +49,7 @@
 			
    </div><br/>
 	<div class="user-box">
-	  <input type="text" id="inputAmount" name="income_comment" "/>
+	  <input type="text" id="inputAmount" name="income_comment" autocomplete="off"/>
     <label for="Comment">Comment</label>
     </div>
     <a href="">
