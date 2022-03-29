@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use \Core\View;
 use \App\Models\Balance;
+use \App\Models\Expense;
+use \App\Models\Income;
 
 /**
  * AddIncome controller
@@ -47,17 +49,28 @@ class BalanceControllers extends \Core\Controller
 	}
 	
 	public function showBalance($option, $year, $month=''){
+		
+		$showNameOfExpensesCattegories = Expense::findAllExpensesCattegories();
+		$showNameOfIncomesCattegories = Income::findAllIncomesCattegories();
+		
 		$balance = new Balance( );
 		$balance->setBalance($year, $month);
 		View::renderTemplate('/Balance/new.html',
 			array('incomes' => $balance->getIncomes(), 'incomesCategory' => $balance->getIncomesCategory(), 
 			'expensesCategory' =>$balance->getExpensesCategory(), 'expenses' => $balance->getExpenses(), 
-			'saldoIncomes' => $balance->getIncomesAmount(), 'saldoExpenses' =>$balance->getExpensesAmount(), 'option' => $option)
+			'saldoIncomes' => $balance->getIncomesAmount(), 'saldoExpenses' =>$balance->getExpensesAmount(), 'option' => $option,
+			'showNameOfExpensesCattegories' => $showNameOfExpensesCattegories, 
+			'showNameOfIncomesCattegories' => $showNameOfIncomesCattegories
+			)
 			);
 		
 	}
 	
 	public function showBalanceForPeriodOfTime(){
+		
+		$showNameOfExpensesCattegories = Expense::findAllExpensesCattegories();
+		$showNameOfIncomesCattegories = Income::findAllIncomesCattegories();
+		
 		if(isset($_POST['date1']) && isset($_POST['date2']) ){
 
 			$balance = new Balance();
@@ -66,7 +79,10 @@ class BalanceControllers extends \Core\Controller
 				View::renderTemplate('/Balance/new.html',
 				array('incomes' => $balance->getIncomes(), 'incomesCategory' => $balance->getIncomesCategory(), 
 				'expensesCategory' =>$balance->getExpensesCategory(), 'expenses' => $balance->getExpenses(), 
-				'saldoIncomes' => $balance->getIncomesAmount(), 'saldoExpenses' =>$balance->getExpensesAmount(),  'option' => 2)
+				'saldoIncomes' => $balance->getIncomesAmount(), 'saldoExpenses' =>$balance->getExpensesAmount(),  'option' => 2,
+				'showNameOfExpensesCattegories' => $showNameOfExpensesCattegories,
+				'showNameOfIncomesCattegories' => $showNameOfIncomesCattegories
+				)
 				);
 			}
 			else{
@@ -74,4 +90,8 @@ class BalanceControllers extends \Core\Controller
 			}	
 		}
 	}
+
+	
+
+	
 }

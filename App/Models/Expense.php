@@ -37,8 +37,8 @@ class Expense extends \Core\Model
            $stmt = $db->prepare($sql);
 
             $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
-            $stmt->bindValue(':expense_category_assigned_to_user_id', $this->expense_category_assigned_to_user_id, PDO::PARAM_INT);
-			$stmt->bindValue(':payment_method_assigned_to_user_id', $this->payment_method_assigned_to_user_id, PDO::PARAM_INT);
+            $stmt->bindValue(':expense_category_assigned_to_user_id', $this->expense_category_assigned_to_user_id, PDO::PARAM_STR);
+			$stmt->bindValue(':payment_method_assigned_to_user_id', $this->payment_method_assigned_to_user_id, PDO::PARAM_STR);
 			$stmt->bindValue(':amount', $this->amount, PDO::PARAM_STR);
             $stmt->bindValue(':date_of_expense', $this->date_of_expense, PDO::PARAM_STR);
             $stmt->bindValue(':expense_comment', $this->expense_comment, PDO::PARAM_STR);
@@ -161,5 +161,109 @@ class Expense extends \Core\Model
 			return $stmt->fetchAll();
     }
 	
-  
+	public static function findAllExpensesCattegories(){
+		
+		$user_id=$_SESSION['user_id'];
+		
+		$sql = 'SELECT * FROM expenses_category_assigned_to_users 
+				WHERE user_id = :user_id';
+			
+			$db = static::getDB();
+			$stmt = $db->prepare($sql);
+			$stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+			$stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+
+			$stmt->execute();
+
+		return $stmt->fetchAll();
+		
+	}
+	
+  public static function findAllPaymentMethods(){
+		
+		$user_id=$_SESSION['user_id'];
+		
+		$sql = 'SELECT * FROM payment_methods_assigned_to_users 
+				WHERE user_id = :user_id';
+			
+			$db = static::getDB();
+			$stmt = $db->prepare($sql);
+			$stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+			$stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+
+			$stmt->execute();
+
+		return $stmt->fetchAll();
+	}
+
+	
+
+	
+
+	public static function getLimitsForCattegories(){
+
+		$user_id=$_SESSION['user_id'];
+		
+		$sql = 'SELECT expensesLimit FROM expenses_category_assigned_to_users 
+				WHERE user_id = :user_id';
+			
+			$db = static::getDB();
+			$stmt = $db->prepare($sql);
+			$stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+			$stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+
+			$stmt->execute();
+
+		return $stmt->fetchAll();
+	
+	}
+
+	public static function getExpenseAssignetToUser($date_start, $date_end) {
+
+		$user_id=$_SESSION['user_id'];
+		
+		$sql = 'SELECT expenses_category_assigned_to_users.name, SUM(expenses.amount) 
+		AS "amountSum" FROM expenses, expenses_category_assigned_to_users 
+		WHERE expenses.user_id = :prep_user_id 
+		AND expenses_category_assigned_to_users.user_id = expenses.user_id
+		 AND expenses_category_assigned_to_users.id = expenses.expense_category_assigned_to_user_id 
+		 AND expenses.date_of_expense BETWEEN :prep_startDate 
+		 AND :prep_endDate GROUP BY expenses_category_assigned_to_users.name ORDER BY amountSum DESC';
+		$db = static::getDB();	
+		$stmt = $db->prepare($sql);		
+
+		$stmt->bindValue(':prep_user_id', $user_id, PDO::PARAM_INT);
+		$stmt->bindValue(':prep_startDate', $date_start, PDO::PARAM_STR);
+		$stmt->bindValue(':prep_endDate', $date_end, PDO::PARAM_STR);
+		
+		$stmt->execute();	
+		
+		return $stmt->fetchAll();
+	}
+
+	public static function getExpenseCategory() {
+		
+		$user_id=$_SESSION['user_id'];
+
+		$sql = 'SELECT * FROM expenses_category_assigned_to_users WHERE user_id = :prep_user_id';
+		$db = static::getDB();	
+		$stmt = $db->prepare($sql);		
+
+		$stmt->bindValue(':prep_user_id', $user_id, PDO::PARAM_INT);
+		
+		$stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());	
+		$stmt->execute();	
+		return $stmt->fetchAll();
+	}
+
+	
+	
+
+
+	
+
+
+
+	
+	
 }

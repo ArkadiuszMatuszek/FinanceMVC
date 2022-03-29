@@ -155,15 +155,13 @@
 			
 			{% for income in incomes %}
          <td class="column1">
-		 {% if income.income_category_assigned_to_user_id == 1 %}
-		 Wynagrodzenie
-		 {% elseif income.income_category_assigned_to_user_id == 2 %}
-		 Odsetki bankowe
-		 {% elseif income.income_category_assigned_to_user_id == 3 %}
-		 Sprzedaż na allegro
-		 {% elseif income.income_category_assigned_to_user_id == 3 %}
-		 Inne
-		 {% endif %}
+		 
+		 {% for showNameOfIncomesCattegories in showNameOfIncomesCattegories %}
+			{% if income.income_category_assigned_to_user_id == showNameOfIncomesCattegories.id %}
+				{{showNameOfIncomesCattegories.name}}
+			{% endif %}
+		 {% endfor %}
+		 
 		 </td>
        <td class="column1">{{ income.amount }} PLN</td>
         <td class="column1">
@@ -217,15 +215,15 @@
 			
 								
 								<td class="column1">
-								{% if incomeCategory.income_category_assigned_to_user_id == 1 %}
-								 Salary
-								 {% elseif incomeCategory.income_category_assigned_to_user_id == 2 %}
-								 Interest
-								 {% elseif incomeCategory.income_category_assigned_to_user_id == 3 %}
-								 Allegro
-								 {% elseif incomeCategory.income_category_assigned_to_user_id == 3 %}
-								 Another
-								 {% endif %}
+								{% for showNameOfIncomesCattegories in showNameOfIncomesCattegories %}
+									
+									{% if incomeCategory.income_category_assigned_to_user_id == showNameOfIncomesCattegories.id %}
+										{{showNameOfIncomesCattegories.name}}
+									{% endif %}
+									
+								{% endfor %}
+								
+								
 								</td>
 								<td class="column1">{{incomeCategory.sum}} PLN</td>
 							</tr>
@@ -274,39 +272,16 @@
 	
 		{% for expense in expenses %}
          <td class="column1">
-		 {% if expense.expense_category_assigned_to_user_id == 1 %}
-		 Food
-		 {% elseif expense.expense_category_assigned_to_user_id == 2 %}
-		 Apartments
-		 {% elseif expense.expense_category_assigned_to_user_id == 4 %}
-		 Telecommunication
-		 {% elseif expense.expense_category_assigned_to_user_id == 5 %}
-		 Health
-		 {% elseif expense.expense_category_assigned_to_user_id == 6 %}
-		 Clothes
-		 {% elseif expense.expense_category_assigned_to_user_id == 7 %}
-		 Hygiene
-		 {% elseif expense.expense_category_assigned_to_user_id == 8 %}
-		 Kids
-		 {% elseif expense.expense_category_assigned_to_user_id == 9 %}
-		 Recreation
-		 {% elseif expense.expense_category_assigned_to_user_id == 10 %}
-		 Trip
-		 {% elseif expense.expense_category_assigned_to_user_id == 11 %}
-		 Savings
-		 {% elseif expense.expense_category_assigned_to_user_id == 12 %}
-		 For Retirement
-		 {% elseif expense.expense_category_assigned_to_user_id == 12 %}
-		 Debt Repayment
-		 {% elseif expense.expense_category_assigned_to_user_id == 12 %}
-		 Gift
-		 {% elseif expense.expense_category_assigned_to_user_id == 12 %}
-		 Another
-		 {% elseif expense.expense_category_assigned_to_user_id == 12 %}
-		 Transport
-		 {% elseif expense.expense_category_assigned_to_user_id == 12 %}
-		 Books
-		 {% endif %}
+		 
+		 {% for showNameOfExpensesCattegories in showNameOfExpensesCattegories %}
+			
+			{% if expense.expense_category_assigned_to_user_id == showNameOfExpensesCattegories.id %}
+				{{showNameOfExpensesCattegories.name}}
+			{% endif %}
+		 
+		 {% endfor %}
+		 
+		 
 		 </td>
        <td class="column1">{{ expense.amount }} PLN</td>
         <td class="column1">
@@ -359,39 +334,14 @@
 							
 								
 								<td class="column1">
-								{% if expenseCategory.expense_category_assigned_to_user_id == 1 %}
-		 Food
-		 {% elseif expenseCategory.expense_category_assigned_to_user_id == 2 %}
-		 Apartments
-		 {% elseif expenseCategory.expense_category_assigned_to_user_id == 4 %}
-		 Telecommunication
-		 {% elseif expenseCategory.expense_category_assigned_to_user_id == 5 %}
-		 Health
-		 {% elseif expenseCategory.expense_category_assigned_to_user_id == 6 %}
-		 Clothes
-		 {% elseif expenseCategory.expense_category_assigned_to_user_id == 7 %}
-		 Hygiene
-		 {% elseif expenseCategory.expense_category_assigned_to_user_id == 8 %}
-		 Kids
-		 {% elseif expenseCategory.expense_category_assigned_to_user_id == 9 %}
-		 Recreation
-		 {% elseif expenseCategory.expense_category_assigned_to_user_id == 10 %}
-		 Trip
-		 {% elseif expenseCategory.expense_category_assigned_to_user_id == 11 %}
-		 Savings
-		 {% elseif expenseCategory.expense_category_assigned_to_user_id == 12 %}
-		 For Retirement
-		 {% elseif expenseCategory.expense_category_assigned_to_user_id == 12 %}
-		 Debt Repayment
-		 {% elseif expenseCategory.expense_category_assigned_to_user_id == 12 %}
-		 Gift
-		 {% elseif expenseCategory.expense_category_assigned_to_user_id == 12 %}
-		 Another
-		 {% elseif expenseCategory.expense_category_assigned_to_user_id == 12 %}
-		 Transport
-		 {% elseif expenseCategory.expense_category_assigned_to_user_id == 12 %}
-		 Books
+									 {% for showNameOfExpensesCattegories in showNameOfExpensesCattegories %}
+								{% if expenseCategory.expense_category_assigned_to_user_id == showNameOfExpensesCattegories.id %}
+		
+
+		{{showNameOfExpensesCattegories.name}}
 		 {% endif %}
+		 
+		 {% endfor %}
 							
 								
 								</td>

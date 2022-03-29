@@ -1,9 +1,13 @@
 function toggleText() {
   var text = document.getElementById("demo");
+  var button = document.getElementById("button1");
+  
   if (text.style.display === "none") {
     text.style.display = "block";
+    button.style.visibility ="hidden";  
   } else {
     text.style.display = "none";
+    
   }
 }
 

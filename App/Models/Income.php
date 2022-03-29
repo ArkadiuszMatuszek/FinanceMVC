@@ -21,8 +21,7 @@ class Income extends \Core\Model
     {
 		
 		$user_id=$_SESSION['user_id'];
-		
-		echo $user_id;
+
 		
 		$this->validateIncomes();
 
@@ -169,6 +168,25 @@ class Income extends \Core\Model
 		
 		return $today;
 	}
+	
+	public static function findAllIncomesCattegories(){
+		
+		$user_id=$_SESSION['user_id'];
+		
+		$sql = 'SELECT * FROM incomes_category_assigned_to_users 
+				WHERE user_id = :user_id';
+			
+			$db = static::getDB();
+			$stmt = $db->prepare($sql);
+			$stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+			$stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+
+			$stmt->execute();
+
+		return $stmt->fetchAll();
+		
+	}
+	
 	
 	
 	

@@ -394,6 +394,90 @@ class User extends \Core\Model
 
 	*/
 	
+	public static function transferPaymentMethods(){
+		
+		$user_id = $_SESSION['user_id'];
+		
+
+			$sql = 'INSERT INTO payment_methods_assigned_to_users (user_id, name) 
+				SELECT :user_id, name FROM payment_methods_default ';
+				
+			$db = static::getDB();
+        $stmt = $db->prepare($sql);
+		
+		$stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+		
+        return $stmt->execute();
+	
+	}
+	
+	public static function IsUserIdExists(){
+		
+		$user_id = $_SESSION['user_id'];
+		
+		$sql = 'SELECT user_id FROM payment_methods_assigned_to_users WHERE user_id = :user_id';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+		
+		$stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+
+        $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+
+        $stmt->execute();
+		return $stmt->fetch();
+		
+		
+		
+	
+		
+		
+		
+		
+		 
+		 
+		
+	}
+	
+	public static function transferIncomesCattegory(){
+		
+		$user_id = $_SESSION['user_id'];
+		
+
+			$sql = 'INSERT INTO incomes_category_assigned_to_users (user_id, name) 
+				SELECT :user_id, name FROM incomes_category_default ';
+				
+			$db = static::getDB();
+        $stmt = $db->prepare($sql);
+		
+		$stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+		
+        return $stmt->execute();
+	
+	}
+	
+	public static function transferExpensesCattegory(){
+		
+		$user_id = $_SESSION['user_id'];
+		
+
+			$sql = 'INSERT INTO expenses_category_assigned_to_users (user_id, name) 
+				SELECT :user_id, name FROM expenses_category_default ';
+				
+			$db = static::getDB();
+        $stmt = $db->prepare($sql);
+		
+		$stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+		
+        return $stmt->execute();
+	
+	}
+
+
+
+	
+	
+	
 	 
 	
 	

@@ -1,0 +1,471 @@
+{% extends "baseSettings.html" %}
+
+{% block title %}Settings{% endblock %}
+
+
+{% block footer %}
+
+<script src="/js/showBalance2.js"></script>
+<script src="/js/modal.js"></script>
+
+
+{% endblock %}
+
+{% block body %}
+
+
+	
+
+	<div id='demo1' style='display: none'>
+		
+		<button class="btn btn1" id="addNewIncomesCattegories" onclick="AddNewIncomesCattegory()" type='button'>Add new incomes cattegory</button>
+		<button class="btn btn1" id="showAllIncomesCattegories" onclick ="showAllIncomesCattegories()" type='button'>Show all incomes cattegories</button>
+		<button class="btn btn1" id="DeleteIncomesCattegories" onclick ="DeleteIncomesCattegories()" type='button' >Delete incomes cattegories</button>
+		<button class="btn btn1" id="ChangeNameOfIncomesCattegory" onclick ="editIncomesCattegory()" type='button' >Change name of incomes cattegory</button>
+		<button class="btn btn1" id="BackToMainMenu" type='button'  onclick="BackToMainMenu()">Back to main menu</button>
+		
+
+</div>
+
+<div id='demo2' style='display: none'>
+	<button class="btn btn1" id="addNewExpensesCattegories" onclick="AddNewExpensesCattegory()" type='button'>Add new expenses cattegory</button>
+	<button class="btn btn1" id="showAllExpensesCattegories" onclick ="showAllExpensesCattegories()" type='button'>Show all expenses cattegories and set limits</button>
+	<button class="btn btn1" id="DeleteExpensessCattegories" onclick ="DeleteExpensesCattegories()" type='button' >Delete expenses cattegories</button>
+	<button class="btn btn1" id="ChangeNameOfExpensesCattegory" onclick ="editExpensesCattegory()" type='button' >Change name of expenses cattegory</button>
+	<button class="btn btn1" id="BackToMainMenu" type='button'  onclick="BackToMainMenu()">Back to main menu</button>
+
+</div>
+
+<div id='demo3' style='display: none'>
+	
+	<button class="btn btn1" id="addNewPaymentsMethod" onclick="AddNewPaymentsMethod()" type='button'>Add new payment Method</button>
+	<button class="btn btn1" id="showAllPaymentCattegories" onclick ="showAllPaymentCattegories()" type='button'>Show all payments cattegories</button>
+	<button class="btn btn1" id="DeletePaymentCattegories" onclick ="DeletePaymentCattegories()" type='button' >Delete payments cattegories</button>
+	<button class="btn btn1" id="ChangeNameOfPaymentCattegory" onclick ="ChangeNameOfPaymentCattegory()" type='button' >Change name of payments cattegory</button>
+	<button class="btn btn1" id="BackToMainMenu" type='button'  onclick="BackToMainMenu()">Back to main menu</button>
+
+</div>
+
+
+
+	<button class="btn btn1" id="IncomesMenager" type='button' onclick="ShowIncomeMenager()">Incomes menager</button>
+	<button class="btn btn1" id="ExpensesMenager" type='button' onclick="ShowExpenseMenager()">Expenses menager</button>
+	<button class="btn btn1" id="PaymentMenager" type='button' onclick="ShowPaymentMenager()">Payment menager</button>
+ 
+	<div id="myModal" class="modal">
+		<!-- Modal content -->
+		<div class="login-box">
+		  <span class="close">&times;</span>
+		<h2>Add new income's cattegory</h2>
+	   <form method="post" action="/settings/addIncome">
+		  <div class="user-box">
+			  
+			<input name="nameOfIncomeCattegory" required="" autocomplete="off" placeholder="Name of cattegory" class="form-control"/>
+	  
+		  </div>	
+		   <a href="">
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>    
+			<button>Add cattegory</button>
+		  </a>
+		  </form>
+		</div>
+	  </div>
+
+	  <div id="myModal1" class="modal">
+		<!-- Modal content -->
+		
+		  <span class="close1">&times;</span>
+		  <div class="limiter">
+			<div class="container-table100">
+				<div class="wrap-table100">
+					<div class="table100">
+			
+	<table>
+		<thead>
+			<tr>
+				
+				<th class="column1">Category</th>
+				
+			</tr>
+	
+		</thead>
+			<tbody>
+	
+		
+				{% for IncomesCattegories in IncomesCattegories %}
+			<tr>
+				
+				<td class="column1">
+							{{ IncomesCattegories.name }} 
+				</td>		
+				
+			</tr>
+
+			
+	   {% endfor %}
+</form>   
+			</tbody>
+	</table>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		</div>
+
+		
+
+		<div id="myModal2" class="modal">
+			<!-- Modal content -->
+			<div class="login-box">
+			  <span class="close2">&times;</span>
+			<h2>Delete income's category</h2>
+			<form method="post" action="/settings/deleteIncomesCattegory">
+			<select name="id" class="form-control">
+				{% for IncomesCattegories in IncomesCattegories %}
+						
+							  <option value='{{ IncomesCattegories.id }}' >{{ IncomesCattegories.name }} </option>
+	  			 {% endfor %}  
+			</select>
+			
+		
+			<a href="">
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>    
+				<button>Add cattegory</button>
+			  </a>
+			
+				</form>
+			
+		
+
+
+
+			</div>
+		  </div>
+	  
+		  <div id="myModal3" class="modal">
+			<!-- Modal content -->
+			<div class="login-box">
+			  <span class="close3">&times;</span>
+			<h2>Change income's category name</h2>
+			<form method="post" action="/settings/changeIncomesName">
+			<select name="id" class="form-control">
+				{% for IncomesCattegories in IncomesCattegories %}
+							  <option value='{{ IncomesCattegories.id }}' >{{ IncomesCattegories.name }} </option>
+	  			 {% endfor %}  
+			</select>
+
+		</br><input name="name" required="" autocomplete="off" placeholder="Name of cattegory" class="form-control" style="text-align: center;"/>
+			
+			
+		
+			<a href="">
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>    
+				<button>Change name</button>
+			  </a>
+			
+				</form>
+			
+		
+
+
+
+			</div>
+		  </div>
+
+		  <div id="myModal4" class="modal">
+			<!-- Modal content -->
+			<div class="login-box">
+			  <span class="close4">&times;</span>
+			<h2>Add new expense's cattegory</h2>
+		   <form method="post" action="/settings/addExpense">
+			  <div class="user-box">
+				<input name="nameOfExpenseCattegory" required="" autocomplete="off" placeholder="Name of cattegory"/>
+		  
+			  </div>	
+			   <a href="">
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>    
+				<button>Add cattegory</button>
+			  </a>
+			  </form>
+			</div>
+		  </div>
+
+		  <div id="myModal5" class="modal">
+			<!-- Modal content -->
+			
+			  <span class="close5">&times;</span>
+			  <div class="limiter">
+				<div class="container-table100">
+					<div class="wrap-table100">
+						<div class="table100">
+				
+		<table>
+			<thead>
+				<tr>
+					<th class="column1">Category</th>
+					<th class="column1">Action</th>
+					<th class="column1">Limit</th>
+				</tr>
+		
+			</thead>
+				<tbody>
+		
+			
+					{% for ExpensesCattegories in ExpensesCattegories %}
+				<tr>
+					<td class="column1">
+								{{ ExpensesCattegories.name }} 
+					</td>	
+					<td class="column1">
+						<button class="btn btn1" id="{{ ExpensesCattegories.id}}" onclick="showFunctionToChangeLimits(this)" type='button'>Set limits!</button>		
+			</td>	
+			<td class="column1">
+				{{ ExpensesCattegories.expensesLimit }} 
+
+			</td>
+				</tr>
+	
+				
+		   {% endfor %}
+	</form>   
+				</tbody>
+		</table>
+						</div>
+					</div>
+				</div>
+			</div>
+	
+			</div>
+
+			<div id="myModal12" class="modal">
+				<!-- Modal content -->
+				<div class="login-box">
+				  <span class="close">&times;</span>
+				<h2>Set expense's limit</h2>
+			   <form method="post" action="/settings/setLimitsForExpenses">
+				  <div class="user-box">
+					  Choosed cattegory:
+					  <select name="id" class="form-control">
+						{% for ExpensesCattegories in ExpensesCattegories %}
+									  <option value="{{ ExpensesCattegories.id }}"> {{ ExpensesCattegories.name }} </option>
+						   {% endfor %}  
+					</select>
+				</br><input type="number" name="expensesLimit" required="" autocomplete="off" style="text-align: center;" placeholder="Limit"/></input>
+			  
+				  </div>	
+				   <a href="">
+					<span></span>
+					<span></span>
+					<span></span>
+					<span></span>    
+					<button>Add cattegory</button>
+				  </a>
+				  </form>
+				</div>
+			  </div>
+
+			<div id="myModal6" class="modal">
+				<!-- Modal content -->
+				<div class="login-box">
+				  <span class="close6">&times;</span>
+				<h2>Delete expense's category</h2>
+				<form method="post" action="/settings/deleteExpensesCattegory">
+				<select name="id" class="form-control">
+					{% for ExpensesCattegories in ExpensesCattegories %}
+							
+								  <option value='{{ ExpensesCattegories.id }}' >{{ ExpensesCattegories.name }} </option>
+					   {% endfor %}  
+				</select>
+				
+			
+				<a href="">
+					<span></span>
+					<span></span>
+					<span></span>
+					<span></span>    
+					<button>Delete</button>
+				  </a>
+				
+					</form>
+				
+			
+	
+	
+	
+				</div>
+			  </div>
+
+			  
+
+			  <div id="myModal7" class="modal">
+				<!-- Modal content -->
+				<div class="login-box">
+				  <span class="close7">&times;</span>
+				<h2>Change expense's category name</h2>
+				<form method="post" action="/settings/changeExpensesName">
+				<select name="id" class="form-control">
+					{% for ExpensesCattegories in ExpensesCattegories %}
+								  <option value='{{ ExpensesCattegories.id }}' >{{ ExpensesCattegories.name }} </option>
+					   {% endfor %}  
+				</select>
+	
+			</br><input name="name" required="" autocomplete="off" placeholder="name of cattegory" class="form-control" style="text-align: center;"/>
+				
+			
+				<a href="">
+					<span></span>
+					<span></span>
+					<span></span>
+					<span></span>    
+					<button>Change name</button>
+				  </a>
+				
+					</form>
+				
+			
+	
+	
+	
+				</div>
+			  </div>
+
+			  <div id="myModal8" class="modal">
+				<!-- Modal content -->
+				<div class="login-box">
+				  <span class="close8">&times;</span>
+				<h2>Add new payment's method</h2>
+			   <form method="post" action="/settings/addPaymentMethod">
+				  <div class="user-box">
+					<input name="nameOfPaymentMethod" required="" autocomplete="off" placeholder="Payment's method" /> 
+			  
+				  </div>	
+				   <a href="">
+					<span></span>
+					<span></span>
+					<span></span>
+					<span></span>    
+					<button>Add</button>
+				  </a>
+				  </form>
+				</div>
+			  </div>
+
+			  <div id="myModal9" class="modal">
+				<!-- Modal content -->
+				
+				  <span class="close">&times;</span>
+				  <div class="limiter">
+					<div class="container-table100">
+						<div class="wrap-table100">
+							<div class="table100">
+					
+			<table>
+				<thead>
+					<tr>
+						<th class="column1">Category</th>
+						
+		
+					</tr>
+			
+				</thead>
+					<tbody>
+			
+				
+						{% for PaymentMethodsCattegories in PaymentMethodsCattegories %}
+					<tr>
+						<td class="column1">
+							{{ PaymentMethodsCattegories.name }}
+						</td>		
+					</tr>
+		
+					
+			   {% endfor %}
+		</form>   
+					</tbody>
+			</table>
+							</div>
+						</div>
+					</div>
+				</div>
+		
+				</div>
+
+				<div id="myModal10" class="modal">
+					<!-- Modal content -->
+					<div class="login-box">
+					  <span class="close">&times;</span>
+					<h2>Delete payment's method</h2>
+					<form method="post" action="/settings/deletePaymentsMethods">
+					<select name="id" class="form-control">
+						{% for PaymentMethodsCattegories in PaymentMethodsCattegories %}
+								
+									  <option value='{{ PaymentMethodsCattegories.id }}' >{{ PaymentMethodsCattegories.name }} </option>
+						   {% endfor %}  
+					</select>
+					
+				
+					<a href="">
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>    
+						<button>delete</button>
+					  </a>
+					
+						</form>
+					
+				
+		
+		
+		
+					</div>
+				  </div>
+
+				  <div id="myModal11" class="modal">
+					<!-- Modal content -->
+					<div class="login-box">
+					  <span class="close">&times;</span>
+					<h2>Change payment's method name</h2>
+					<form method="post" action="/settings/changePaymentsMethods">
+					<select name="id" class="form-control">
+						{% for PaymentMethodsCattegories in PaymentMethodsCattegories %}
+									  <option value='{{ PaymentMethodsCattegories.id }}' >{{ PaymentMethodsCattegories.name }} </option>
+						   {% endfor %}  
+					</select>
+		
+				</br><input name="name" required="" autocomplete="off" class="form-control" placeholder="Payment's method" style="text-align: center;"/>
+					
+				
+					<a href="">
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>    
+						<button>Change name</button>
+					  </a>
+					
+						</form>
+					
+				
+		
+		
+		
+					</div>
+				  </div>
+
+
+	
+{% endblock %}

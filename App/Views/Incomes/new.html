@@ -38,10 +38,10 @@
 	<div class="user-box">
 	<label for="inputCategory"> Category: </label><br/><br/>
 					<select name='income_category_assigned_to_user_id' id='inputCategory' class="form-control">
-						<option  value='1' selected>Salary</option>
-						<option value='2'  >Interest</option>
-						<option value='3'  >Allegro</option>
-						<option value='4'  >Another</option>
+					{% for cattegories in cattegories %}
+						<option  value='{{ cattegories.id }}' selected>{{ cattegories.name }}</option>				
+						{% endfor %}
+						
 						
 						
 					</select>

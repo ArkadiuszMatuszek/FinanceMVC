@@ -40,9 +40,18 @@ class Login extends \Core\Controller
 			
 			Auth::login($user, $remember_me);
 			
+			$user_id2 = User::IsUserIdExists();
+			
+			if($user_id2 == false){
+				User::transferPaymentMethods();
+				User::transferIncomesCattegory();
+				User::transferExpensesCattegory();
+			}
+
 			Flash::addMessage('Login successful');
 			
 			View::renderTemplate('Home/index.html');
+			
 			
          
 

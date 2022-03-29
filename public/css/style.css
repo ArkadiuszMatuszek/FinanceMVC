@@ -362,3 +362,38 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 input[type="date"]::-webkit-calendar-picker-indicator:hover {
   opacity: 1
 }
+
+.settingsOption{
+	
+	margin-top: 30px;
+	font-size: 30px;
+	min-height: 80px;
+	color: black;
+	
+
+	background: rgba(0,0,0,.5);
+	width: 300px;
+	margin-left: auto;
+	margin-right: auto;
+	
+}
+
+#settings{
+	
+	width: 1000px;
+	min-height: 500px;
+	background-color: red;
+}
+
+.limit{
+	font-size: 12px;
+}
+
+.tableLimit {
+	font-size: 16px;
+	text-align: left;
+}
+
+.hidden {
+  display: none;
+}

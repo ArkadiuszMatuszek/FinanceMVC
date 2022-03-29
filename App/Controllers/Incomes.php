@@ -22,6 +22,7 @@ class Incomes extends \Core\Controller
     public function indexAction()
     {	
 		$today = Income::todayDate();
+		$cattegories = Income::findAllIncomesCattegories();
 		
 		$user_id=$_SESSION['user_id'];
 		
@@ -29,7 +30,9 @@ class Incomes extends \Core\Controller
 			View::renderTemplate('/Signup/new.html');
 		}else{
 			 View::renderTemplate('/Incomes/new.html', 
-		['today' => $today]
+		['today' => $today,
+		'cattegories' => $cattegories
+		]
 		);
 		}
 		

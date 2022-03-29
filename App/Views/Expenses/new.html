@@ -2,17 +2,39 @@
 
 {% block title %}Expenses{% endblock %}
 
+{% block footer %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="/js/showLimist.js"></script>
+
+
+{% endblock %}
+
 {% block body %}
+
+
 
     	<div class="login-box">
   <h2>Add expense</h2>
   <form method="post" action="/expenses/create">
+	
     <div class="user-box">
-	  <input type="number" id="inputAmount" name="amount" required="" step="0.01" autocomplete="off"/>
+	  <input type="number" id="inputAmount" name="amount" class="form-control" required="" step="0.01" autocomplete="off" onChange="sendAmountAndCategory();"/>
     <label for="inputAmount">Amount</label>
     </div>
+
 	<div class="user-box">
-	  <input type="date" id="inputDate" name="date_of_expense" required="" value="{{today}}" style="color-scheme: dark"/>
+
+			<div id="limit0" class="row" style="color: white;"></div>			
+			<div id="limit1" class="row" style="color: white;"></div>			
+			<div id="limit2" class="row" style="color: white;"></div>			
+			<div id="limit3" class="row" style="color: white;"></div>			
+			<div id="limit4" class="row" style="color: white;"></div>			
+		
+	</div></br>
+
+	<div class="user-box">
+	  <input type="date" id="inputDate" name="date_of_expense" class="form-control" required="" value="{{today}}" style="color-scheme: dark" onChange="sendAmountAndCategory();"/>
     <label for="inputDate">Date</label>
     </div>
     
@@ -21,41 +43,36 @@
 	<div class="user-box">
 		<label for="inputWayToPay"> Forms Pay </label><br/><br/>
 	<select name='payment_method_assigned_to_user_id' id='inputWayToPay' class="form-control">
-						<option  value='1'>Cash</option>
-						<option value='2'  >Debet card</option>
-						<option value='3'  >Credit card</option>
+						{% for paymentMethods in paymentMethods %}
+						<option  value='{{ paymentMethods.id}}' selected>{{ paymentMethods.name }}</option>				
+						{% endfor %}
 					</select>
 	
 	</div>
+
+	
 			
    
   <div class="user-box">
 		<label for="Category"> Category: </label><br/><br/>
-					<select name='expense_category_assigned_to_user_id' id='Category' class="form-control">
-						<option  value='1'>Food</option>
-						<option value='2'  >Apartments</option>
-						<option value='3'  >Transport</option>
-						<option value='4'  >Telecommunication</option>
-						<option value='5'  >Healt</option>
-						<option value='6'  >Clothes</option>
-						<option value='7'  >Higiene</option>
-						<option value='8'  >Kids</option>
-						<option value='9'  >Recreation</option>
-						<option value='10'  >Trip</option>
-						<option value='11'  >Traning</option>
-						<option value='12'  >Book</option>
-						<option value='13'  >Savings</option>
-						<option value='14'  >For retirement</option>
-						<option value='15'  >Debt Repayment</option>
-						<option value='16'  >Figt</option>
-						<option value='17'  >Another</option>
+					<select name='expense_category_assigned_to_user_id' id='Category' class="form-control" onChange="sendAmountAndCategory();">
+						{% for cattegories in cattegories %}
+						<option  value="{{ cattegories.id }}" >{{ cattegories.name }}</option>				
+						{% endfor %}
+						
 					</select>
-		</div><br/>
+		</div></br>
+
+		
+
+		
 		
 		<div class="user-box">
 	  <input type="text" id="inputAmount" name="expense_comment" autocomplete="off"/>
     <label for="Comment">Comment</label>
     </div>
+
+	
 	
     <a href="">
       <span></span>
@@ -78,5 +95,7 @@
 	
   </form>
 </div>
-	
+
+
+
 {% endblock %}
